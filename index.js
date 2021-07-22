@@ -175,8 +175,33 @@ class Instructor extends Lambdasian {
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
-   
+class Student extends Lambdasian{
+   constructor(object) {
+     super(object);
+     this.previousBackground = object.previousBackground;
+     this.className = object.className;
+     this.favSubjects = object.favSubjects;
+   }
+
+   listSubjects() {
+     let newString = `Loving ${this.favSubjects[0]}`;
+     this.favSubjects.forEach((element,index) => {
+       if (index>0) {
+         newString += `, ${element}`;
+       }
+     });
+     newString += `!`;
+     return newString;
+   }
+
+   PRAssignment(subject) {
+      return `${this.name} has submitted a PR for ${subject}`;
+   }
+
+   sprintChallenge(subject) {
+    return `${this.name} has begun sprint challenge on ${subject}`;
+ }
+
 }
 
 /*
@@ -192,8 +217,22 @@ class Student {
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
-   
+class ProjectManager extends Instructor {
+    constructor(object){
+      super(object);
+      this.gradClassName = object.gradClassName;
+      this.favInstructor = object.favInstructor;
+    }
+
+    standUp(channel){
+      return `${this.name} announces to ${channel}, @channel standy times!`;
+    }
+
+    debugsCode(student,subject){
+      return `${this.name} debugs ${student.name}'s code on ${subject}`;
+    }
+
+
 }
 /*
   STRETCH PROBLEM (no tests!)
